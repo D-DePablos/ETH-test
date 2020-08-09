@@ -6,7 +6,7 @@ w3_main =  "https://mainnet.infura.io/v3/c65dc98caf2a4466b2f642011705d15f"
 w3_test =  "https://ropsten.infura.io/v3/c65dc98caf2a4466b2f642011705d15f"
 
 # Select testnet or mainnet
-w3 = Web3(Web3.HTTPProvider("w3_test"))
+w3 = Web3(Web3.HTTPProvider(w3_test))
 
 def test_connection(w3connection):
     """
@@ -19,4 +19,4 @@ def CreateContract():
 
 
 if __name__ == '__main__':
-    pass
+    test_connection(w3)
