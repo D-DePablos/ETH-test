@@ -1,0 +1,3 @@
+.vscode/
+ethdev_venv/
+*Secrets.txt
