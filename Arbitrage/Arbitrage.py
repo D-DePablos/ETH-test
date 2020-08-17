@@ -8,7 +8,7 @@ import utils  # Throws error. Need to check how to import appropriately!
 secrets = utils.getJSONinfo('Secrets.txt')
 infura_url = f"https://mainnet.infura.io/v3/{secrets['INFURA_KEY']}"
 web3 = Web3(Web3.HTTPProvider(infura_url))
-print("Infura Connection: " + str(web3.isConnected()))
+print(f"Infura Connection: {web3.isConnected()}")
 
 #############################---UNISWAP---#####################################
 uniswap_v1 = Uniswap(address="0x5222ffb580f1253234d616A991c23295742A4704",

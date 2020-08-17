@@ -1,3 +1,5 @@
 .vscode/
 ethdev_venv/
 *Secrets.txt
+
+Arbitrage/__pycache__/utils.cpython-37.pyc
