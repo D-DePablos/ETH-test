@@ -4,14 +4,6 @@ from os import getcwd
 
 # Save all of the relevant info into TXTs for future reference
 if __name__ == "__main__":
-    # Wallet addresses
-    walletDic = {
-        "Dapper": "0x1F46f6485951cB814C812bA6c80a85b2372C9806",
-    }
-
-    with open(f"{getcwd()}/Utils/Wallets.txt", "w") as json_file:
-        json.dump(walletDic, json_file)
-
     # Token Addresses - Add here
     tokenDic = {
         "eth": ["0x0000000000000000000000000000000000000000", "ETHEREUM"],
@@ -28,30 +20,45 @@ if __name__ == "__main__":
         "bal": ["0xba100000625a3754423978a60c9317c58a424e3D", "BAL Balancer"],
     }
 
-    with open(f"{getcwd()}/Utils/Tokens.txt", "w") as json_file:
-        json.dump(tokenDic, json_file)
+    with open(f"{getcwd()}/Utils/Tokens.json", "w") as json_file:
+        json.dump(tokenDic, json_file, indent=2, sort_keys=True)
+    
+    print("Generated Tokens.json!")
 
-    # Private Keys, API Keys
+    ##########################--SECRETS-########################################################
     # Use secrets file for all of the personal information used for interaction, or face consequences!
     API_KEY = input(
         "Please write your INFURA API Key, or enter 'n' to cancel generating new secrets file: "
     )
-    PRIVATE_KEY = input(
-        "Please write your Private Key, or enter 'n' to cancel generating new secrets file: "
-    )
 
-    if (API_KEY or PRIVATE_KEY) == "n":
-        pass
-
-    else:
+    if API_KEY is not "n":
         assert (
             len(API_KEY) == 32
         ), "Length of API key different to 32. Please check your key"
 
+        # Input wallet name, public and private key
+        WALLET_NAME = input(
+            "Please write a name for this wallet: "
+        )
+        
+        WALLET_ADDRESS = input(
+            "Please write the ETH address (public Key) for the wallet: "
+        )
+
+        PRIVATE_KEY = input(
+            f"Please write your Private Key for the wallet {WALLET_NAME} : "
+        )
+
+        "0x64B976BE4F56dbF10Ca31199eAF63DEc3002b883"
+        # Generate dictionary to create valid txt file with secret info
         apiDic = {
             "INFURA_KEY": API_KEY,
+            "WALLET_NAME": WALLET_NAME,
+            "WALLET_ADDRESS": WALLET_ADDRESS,
             "PRIVATE_KEY": PRIVATE_KEY,
         }
 
-        with open(f"{getcwd()}/Utils/Secrets.txt", "w") as json_file:
-            json.dump(apiDic, json_file)
+        with open(f"{getcwd()}/Utils/Secrets.json", "w") as json_file:
+            json.dump(apiDic, json_file, indent=2, sort_keys=False)
+
+        print("Successfully created Secrets.json!")
