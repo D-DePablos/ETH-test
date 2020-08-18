@@ -48,20 +48,20 @@ for token_key in tokens:
 
         print(f"\nFinding arbitrage for {token_key}:{_token_id} at {_token_address}")
         # BUY IN V1, SELL IN V2
-        take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, amount)
-        give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, take_v1)
+        _take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, amount)
+        _give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, _take_v1)
         # BUY IN V2, SELL IN V1
-        take_v2 = uniswap_v2.get_eth_token_input_price(_token_address, amount)
-        give_v1 = uniswap_v1.get_token_eth_input_price(_token_address, take_v2)
+        _take_v2 = uniswap_v2.get_eth_token_input_price(_token_address, amount)
+        _give_v1 = uniswap_v1.get_token_eth_input_price(_token_address, _take_v2)
 
-        if give_v2 > amount:
+        if _give_v2 > amount:
             print(
-                f"Worth! Spend {web3.fromWei(amount, 'ether')} ETH in  {_token_id} in V1, and sell it in V2. Profit = {web3.fromWei(give_v2 - amount, 'ether')} ETH \n"
+                f"Worth! Spend {web3.fromWei(amount, 'ether')} ETH in  {_token_id} in V1, and sell it in V2. Profit = {web3.fromWei(_give_v2 - amount, 'ether')} ETH \n"
             )
 
-        if give_v1 > amount:
+        if _give_v1 > amount:
             print(
-                f"Worth! Spend {web3.fromWei(amount, 'ether')} ETH in  {_token_id} in V2, and sell it in V1. Profit = {web3.fromWei(give_v1 - amount, 'ether')} ETH \n"
+                f"Worth! Spend {web3.fromWei(amount, 'ether')} ETH in  {_token_id} in V2, and sell it in V1. Profit = {web3.fromWei(_give_v1 - amount, 'ether')} ETH \n"
             )
 
 
