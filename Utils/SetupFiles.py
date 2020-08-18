@@ -24,7 +24,9 @@ if __name__ == '__main__':
                 'ant' : ["0x960b236A07cf122663c4303350609A66A7B288C0", "ANT Aragon"],
                 'ast' : ["0x27054b13b1B798B345b591a4d22e6562d47eA75a", "AST AirSwap"],
                 'band' : ["0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55", "BAND BandToken"],
-                'bnt' : ["0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C", "BNT Bancor"]
+                'bnt' : ["0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C", "BNT Bancor"],
+                'bzrx' : ["0x56d811088235F11C8920698a204A5010a788f4b3", "bZx Protocol Token"],
+                'bal' : ["0xba100000625a3754423978a60c9317c58a424e3D", "BAL Balancer"],
                 }
 
     with open(f'{getcwd()}/Utils/Tokens.txt', 'w') as json_file:
@@ -33,15 +35,19 @@ if __name__ == '__main__':
 
     # Private Keys, API Keys
     # Use secrets file for all of the personal information used for interaction, or face consequences!
-    API_KEY = input("Please write your INFURA API Key: ")
-    assert(len(API_KEY)==32), "Length of API key different to 32. Please check your key"
+    API_KEY = input("Please write your INFURA API Key, or enter 'n' to cancel generating new secrets file: ")
 
-    apiDic = {
-        "INFURA_KEY": API_KEY,
-    }
+    if API_KEY == 'n':
+        pass
 
-    with open(f'{getcwd()}/Utils/Secrets.txt', 'w') as json_file:
-        json.dump(apiDic, json_file)
+    else:
+        assert(len(API_KEY)==32), "Length of API key different to 32. Please check your key"
+
+        apiDic = {
+            "INFURA_KEY": API_KEY,
+        }
+
+        with open(f'{getcwd()}/Utils/Secrets.txt', 'w') as json_file:
+            json.dump(apiDic, json_file)
 
     
-

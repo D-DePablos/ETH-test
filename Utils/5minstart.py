@@ -1,8 +1,17 @@
+import json
 from web3 import Web3
-import utils
+
+def getJSONinfo(file):
+    """
+    Get Information from a txt file within Utils directory
+    """
+    with open(f"Utils/{file}", 'r') as openfile:
+        JSONinfo = json.load(openfile)
+
+    return JSONinfo
 
 # Secrets Handling -> Set INFURA KEY from FileGeneration.ipynb
-secrets = utils.getJSONinfo('Secrets.txt')
+secrets = getJSONinfo('Secrets.txt')
 
 # Web3 provider from Infura (ACCOUNT SPECIFIC)
 w3_main =  f"https://mainnet.infura.io/v3/{secrets['INFURA_KEY']}"
@@ -10,7 +19,7 @@ w3_test =  f"https://ropsten.infura.io/v3/{secrets['INFURA_KEY']}"
 
 
 # Open up a specific ETH wallet
-wallet = utils.getJSONinfo('Wallets.txt')
+wallet = getJSONinfo('Wallets.txt')
 Dapper_Wallet = wallet["Dapper"]
 
 # Quick test of a web3 connection

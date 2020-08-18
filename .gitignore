@@ -1,5 +1,10 @@
+# Environment
 .vscode/
 ethdev_venv/
+
+# Secrets
 *Secrets.txt
 
-Arbitrage/__pycache__/utils.cpython-37.pyc
+# Trash that Python creates
+*pychache*
+*cpython*
