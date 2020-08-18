@@ -6,5 +6,5 @@ ethdev_venv/
 *Secrets.txt
 
 # Trash that Python creates
-*pychache*
+**/__pychache__
 *cpython*
