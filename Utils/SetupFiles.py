@@ -36,8 +36,9 @@ if __name__ == '__main__':
     # Private Keys, API Keys
     # Use secrets file for all of the personal information used for interaction, or face consequences!
     API_KEY = input("Please write your INFURA API Key, or enter 'n' to cancel generating new secrets file: ")
+    PRIVATE_KEY = input("Please write your Private Key, or enter 'n' to cancel generating new secrets file: ")
 
-    if API_KEY == 'n':
+    if (API_KEY or PRIVATE_KEY) == 'n':
         pass
 
     else:
@@ -45,6 +46,7 @@ if __name__ == '__main__':
 
         apiDic = {
             "INFURA_KEY": API_KEY,
+            "PRIVATE_KEY": PRIVATE_KEY,
         }
 
         with open(f'{getcwd()}/Utils/Secrets.txt', 'w') as json_file:

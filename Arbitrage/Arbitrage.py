@@ -13,14 +13,14 @@ assert web3.isConnected(), "Not connected to ETH node in INFURA"
 #############################---UNISWAP---#####################################
 uniswap_v1 = Uniswap(
     address="0x5222ffb580f1253234d616A991c23295742A4704",
-    private_key="556c2c22356e68eaf82000e12ec27df2a25602787c9024418b5638cca14ecd3d",
+    private_key=secrets['PRIVATE_KEY'],
     web3=web3,
     version=1,
 )
 
 uniswap_v2 = Uniswap(
     address="0x5222ffb580f1253234d616A991c23295742A4704",
-    private_key="556c2c22356e68eaf82000e12ec27df2a25602787c9024418b5638cca14ecd3d",
+    private_key=secrets['PRIVATE_KEY'],
     web3=web3,
     version=2,
 )
