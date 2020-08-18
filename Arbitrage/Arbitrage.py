@@ -46,7 +46,7 @@ for token_key in tokens:
         _token_address = tokens[token_key][0]
         _token_id = tokens[token_key][1]
 
-        print(f"Finding arbitrage for {token_key}:{_token_id} at {_token_address}")
+        print(f"\nFinding arbitrage for {token_key}:{_token_id} at {_token_address}")
         # BUY IN V1, SELL IN V2
         take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, amount)
         give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, take_v1)
