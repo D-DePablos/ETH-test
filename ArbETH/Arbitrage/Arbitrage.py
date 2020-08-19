@@ -2,7 +2,7 @@
 import time
 from web3 import Web3
 from uniswap import Uniswap
-import utils  # Throws error. Need to check how to import appropriately!
+from Utils import utils
 
 #############################---SECRETS---######################################
 # Load in relevant json file

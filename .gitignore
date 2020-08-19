@@ -8,3 +8,7 @@ ethdev_venv/
 # Trash that Python creates
 **/__pychache__
 *cpython*
+
+
+# Non-committed folder to do small tests
+*WEB3_Py**
