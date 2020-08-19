@@ -163,6 +163,8 @@ class oneInchHandler(UniversalHandler):
 
 if __name__ == '__main__':
 
+    # TODO: Check this https://www.programcreek.com/python/example/107998/web3.Web3
+
     with open("Utils/Secrets.json", "r") as openfile:
         secrets = json.load(openfile)
 
