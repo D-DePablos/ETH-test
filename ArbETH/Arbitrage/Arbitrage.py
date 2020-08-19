@@ -2,7 +2,7 @@
 import time
 from web3 import Web3
 from uniswap import Uniswap
-from Utils import utils
+from . import utils
 
 #############################---SECRETS---######################################
 # Load in relevant json file
