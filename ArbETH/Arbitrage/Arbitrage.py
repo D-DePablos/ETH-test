@@ -1,8 +1,12 @@
 # Attempt to find good prices within Uniswap
+import os, sys
 import time
 from web3 import Web3
 from uniswap import Uniswap
-from . import utils
+
+# Hack to get imports to work
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+from Utils import utils
 
 #############################---SECRETS---######################################
 # Load in relevant json file
