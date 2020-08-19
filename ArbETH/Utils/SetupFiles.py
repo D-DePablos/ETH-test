@@ -6,18 +6,18 @@ from os import getcwd
 if __name__ == "__main__":
     # Token Addresses - Add here
     tokenDic = {
-        "eth": ["0x0000000000000000000000000000000000000000", "ETHEREUM"],
-        "bat": ["0x0D8775F648430679A709E98d2b0Cb6250d2887EF", "BAT"],
-        "dai": ["0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359", "DAI Stablecoin"],
-        "amn": ["0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c", "AMN Amon"],
-        "ampl": ["0xD46bA6D942050d489DBd938a2C909A5d5039A161", "AMPL Ampleforth"],
-        "anj": ["0xcD62b1C403fa761BAadFC74C525ce2B51780b184", "ANJ AragonNetworkJuror"],
-        "ant": ["0x960b236A07cf122663c4303350609A66A7B288C0", "ANT Aragon"],
-        "ast": ["0x27054b13b1B798B345b591a4d22e6562d47eA75a", "AST AirSwap"],
-        "band": ["0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55", "BAND BandToken"],
-        "bnt": ["0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C", "BNT Bancor"],
-        "bzrx": ["0x56d811088235F11C8920698a204A5010a788f4b3", "bZx Protocol Token"],
-        "bal": ["0xba100000625a3754423978a60c9317c58a424e3D", "BAL Balancer"],
+        "ETH": ["0x0000000000000000000000000000000000000000", "ETHEREUM"],
+        "BAT": ["0x0D8775F648430679A709E98d2b0Cb6250d2887EF", "BAT"],
+        "DAI": ["0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359", "DAI Stablecoin"],
+        "AMN": ["0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c", "AMN Amon"],
+        "AMPl": ["0xD46bA6D942050d489DBd938a2C909A5d5039A161", "AMPL Ampleforth"],
+        "ANJ": ["0xcD62b1C403fa761BAadFC74C525ce2B51780b184", "ANJ AragonNetworkJuror"],
+        "ANT": ["0x960b236A07cf122663c4303350609A66A7B288C0", "ANT Aragon"],
+        "AST": ["0x27054b13b1B798B345b591a4d22e6562d47eA75a", "AST AirSwap"],
+        "BANd": ["0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55", "BAND BandToken"],
+        "BNT": ["0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C", "BNT Bancor"],
+        "BZRX": ["0x56d811088235F11C8920698a204A5010a788f4b3", "bZx Protocol Token"],
+        "BAL": ["0xba100000625a3754423978a60c9317c58a424e3D", "BAL Balancer"],
     }
 
     with open(f"{getcwd()}/Utils/Tokens.json", "w") as json_file:
