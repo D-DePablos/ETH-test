@@ -3,7 +3,7 @@
 ethdev_venv/
 
 # Secrets
-*Secrets.txt
+*Secrets.json
 
 # Trash that Python creates
 **/__pychache__

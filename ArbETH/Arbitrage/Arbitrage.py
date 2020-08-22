@@ -45,44 +45,58 @@ uniswap_v2 = Uniswap(
 
 #############################---TOKENS---######################################
 tokens = utils.getJSONinfo("Tokens.json")
-blacklist = ["eth", "weth", "bzrx", "bal"]  # Note that ETH and WETH are == ETH
+blacklist = ["ETH", "WETH", "BZRX", "BAL"]  # Note that ETH and WETH are == ETH
 
 # These tokens give different problems.
-# ["bzrx", "bal"]
+# ["BZRX", "BAL"]
 
 ############################---ARBITRAGE---####################################
 # TODO: Would be useful to know transaction fee costs at the time
 time_start = time.time()
 
-# amount = 1*10**18  #1 eth
-amount = 1 * 10 ** 17
+# 1*10**18 = 1 eth
+invest = 1 * 10 ** 17
+profit = 0
+tax = 0.003
 
 for token_key in tokens:
     if token_key not in blacklist:
         _token_address = tokens[token_key][0]
         _token_id = tokens[token_key][1]
-
         print(f"\nFinding arbitrage for {token_key}:{_token_id} at {_token_address}")
-        # BUY IN V1, SELL IN V2
-        _take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, amount)
-        _give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, _take_v1)
 
-        # BUY IN V2, SELL IN V1
-        _take_v2 = uniswap_v2.get_eth_token_input_price(_token_address, amount)
-        _give_v1 = uniswap_v1.get_token_eth_input_price(_token_address, _take_v2)
+        # First Trade Fee
+        _fee = int(invest*tax)
+        _remaining = invest - _fee
 
-        if _give_v2 > amount:
+        ##### EXCHANGE 1: BUY IN V1, SELL IN V2
+        _take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, _remaining)
+        # Second Trade Fee
+        _fee = int(_take_v1*tax)
+        _remaining_1 = _take_v1 - _fee
+        # Second Trade
+        _give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, _remaining_1)
+
+        ##### EXCHANGE 2: BUY IN V2, SELL IN V1
+        _take_v2 = uniswap_v2.get_eth_token_input_price(_token_address, _remaining)
+        # Second Trade Fee
+        _fee = int(_take_v2*tax)
+        _remaining_2 = _take_v2 - _fee
+        # Second Trade
+        _give_v1 = uniswap_v1.get_token_eth_input_price(_token_address, _remaining_2)
+
+        if _give_v2 > invest:
             print(
-                f"Worth! Spend {web3.fromWei(amount, 'ether')} \
+                f"Worth! Spend {web3.fromWei(invest, 'ether')} \
                  ETH in  {_token_id} in V1, and sell it in V2. \
-                 Profit = {web3.fromWei(_give_v2 - amount, 'ether')} ETH \n"
+                 Profit = {web3.fromWei(_give_v2 - invest, 'ether')} ETH \n"
             )
 
-        if _give_v1 > amount:
+        if _give_v1 > invest:
             print(
-                f"Worth! Spend {web3.fromWei(amount, 'ether')} \
+                f"Worth! Spend {web3.fromWei(invest, 'ether')} \
                  ETH in  {_token_id} in V2, and sell it in V1.  \
-                 Profit = {web3.fromWei(_give_v1 - amount, 'ether')} ETH \n"
+                 Profit = {web3.fromWei(_give_v1 - invest, 'ether')} ETH \n"
             )
 
 
