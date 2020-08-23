@@ -57,7 +57,8 @@ time_start = time.time()
 # 1*10**18 = 1 eth
 invest = 1 * 10 ** 17
 profit = 0
-tax = 0.003
+ex_tax = 0.003
+fl_tax = 0.0009
 
 for token_key in tokens:
     if token_key not in blacklist:
@@ -65,25 +66,29 @@ for token_key in tokens:
         _token_id = tokens[token_key][1]
         print(f"\nFinding arbitrage for {token_key}:{_token_id} at {_token_address}")
 
+        # Flash Loan Fee
+        _fl_fee = int(invest*fl_tax)
         # First Trade Fee
-        _fee = int(invest*tax)
+        _fee = int(invest*ex_tax)
         _remaining = invest - _fee
 
         ##### EXCHANGE 1: BUY IN V1, SELL IN V2
         _take_v1 = uniswap_v1.get_eth_token_input_price(_token_address, _remaining)
         # Second Trade Fee
-        _fee = int(_take_v1*tax)
+        _fee = int(_take_v1*ex_tax)
         _remaining_1 = _take_v1 - _fee
         # Second Trade
         _give_v2 = uniswap_v2.get_token_eth_input_price(_token_address, _remaining_1)
+        _give_v2 = _give_v2 - _fl_fee
 
         ##### EXCHANGE 2: BUY IN V2, SELL IN V1
         _take_v2 = uniswap_v2.get_eth_token_input_price(_token_address, _remaining)
         # Second Trade Fee
-        _fee = int(_take_v2*tax)
+        _fee = int(_take_v2*ex_tax)
         _remaining_2 = _take_v2 - _fee
         # Second Trade
         _give_v1 = uniswap_v1.get_token_eth_input_price(_token_address, _remaining_2)
+        _give_v1 = _give_v1 - _fl_fee
 
         if _give_v2 > invest:
             print(
