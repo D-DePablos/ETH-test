@@ -41,8 +41,9 @@ class oneInchHandler(UniversalHandler):
 
         # Get token list
         req = requests.get("https://api.1inch.exchange/v1.1/tokens")
-        assert(req.status_code == 200), "Failed token list request"\
-            f"with code {req.status_code}. Is the URL correct?"
+
+        if req.status_code !=200:
+            raise ValueError(f"Bad Http response {req.status_code}")
 
         with open(tokenlist_location, "w") as json_file:
             json.dump(req.json(), json_file, indent = 4, sort_keys=True)
@@ -77,8 +78,9 @@ class oneInchHandler(UniversalHandler):
 
         # Generate the request and check that it passed with 200
         req = requests.get(endpoint)
-        assert(req.status_code == 200), "Failed quote with code"\
-             f"{req.status_code}. Is the URL correct?"
+
+        if req.status_code !=200:
+            raise ValueError(f"Bad Http response {req.status_code}") 
 
         # Response object
         jsonResponse = req.json()
@@ -152,7 +154,8 @@ class oneInchHandler(UniversalHandler):
 
         # GET request and assertion of correct response
         req = requests.get(endpoint)
-        assert(req.status_code==200), f"Invalid code {req.status_code}"
+        if req.status_code !=200:
+            raise ValueError(f"Bad Http response {req.status_code}") 
 
         jsonResponse = req.json()
 
@@ -165,8 +168,11 @@ if __name__ == '__main__':
 
     # TODO: Check this https://www.programcreek.com/python/example/107998/web3.Web3
 
-    with open("Utils/Secrets.json", "r") as openfile:
-        secrets = json.load(openfile)
+    import os, sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+    from Utils import utils
+
+    secrets = utils.getJSONinfo("Secrets.json")
 
     address = secrets["WALLET_ADDRESS"]
 
